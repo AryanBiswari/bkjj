@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Ko Jaano Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-navbar">
+        <h2>भारत को जानो (कनिष्ठ वर्ग)</h2>
+        <h3>भारत विकास परिषद शाखा डबरा</h3>
+    </nav>
+    <header>
+        <div class="admin-controls">
+            <select id="round-selector" onchange="handleRoundChange()">
+                <option value="">-- Select Round --</option>
+                <option value="Passing Round">Passing Round</option>
+                <option value="Optional Round">Optional Round</option>
+                <option value="Picture Round">Picture Round</option>
+                <option value="Video Round">Video Round</option>
+                <option value="Audio Round">Audio Round</option>
+                <option value="Rapid Fire">Rapid Fire</option>
+            </select>
+
+            <select id="team-selector" class="hidden" onchange="handleTeamChange()">
+                <option value="">-- Select Team --</option>
+                <option value="Team A">Team A</option>
+                <option value="Team B">Team B</option>
+                <option value="Team C">Team C</option>
+                <option value="Team D">Team D</option>
+                <option value="Team E">Team E</option>
+            </select>
+
+            <select id="sub-round-selector" class="hidden" onchange="handleSubRoundChange()">
+                <option value="">-- Select Topic --</option>
+                <option value="Dharam Sanskriti">धर्म और संस्कृति</option>
+                <option value="Khel">खेल</option>
+                <option value="History">इतिहास</option>
+                <option value="Bharat Vikas Parishad">भारत विकास परिषद</option>
+                <option value="Rajniti and Sanvidhaan">राजनीति और संविधान</option>
+            </select>
+        </div>
+        <div id="timer-display">Time: <span id="time-left">30</span>s</div>
+    </header>
+
+    <main>
+        <div id="question-container">
+            <h3 id="question-tracker">Question 0 of 0</h3>
+            <h1 id="question-text">Select a round to begin.</h1>
+            
+            <img id="picture-media" src="" alt="Question Image" style="display: none;">
+            <video id="video-media" controls style="display: none;"></video>
+            <audio id="audio-media" controls style="display: none;"></audio>
+            
+            <h2 id="answer-text" class="hidden"></h2>
+        </div>
+
+        <div class="controls">
+            <button onclick="prevQuestion()">Previous</button>
+            <button onclick="showAnswer()">Show Answer</button>
+            <button id="start-timer-btn" onclick="startTimer()">Start Timer</button>
+            <button onclick="nextQuestion()">Next</button>
+        </div>
+    </main>
+
+    <!-- Clean Footer with no buttons -->
+    <footer>
+        <div class="team" id="team-A">Team A: <span class="score" id="score-A">0</span>(1)</div>
+        <div class="team" id="team-B">Team B: <span class="score" id="score-B">0</span>(2)</div>
+        <div class="team" id="team-C">Team C: <span class="score" id="score-C">0</span>(3)</div>
+        <div class="team" id="team-D">Team D: <span class="score" id="score-D">0</span>(4)</div>
+        <div class="team" id="team-E">Team E: <span class="score" id="score-E">0</span>(5)</div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
