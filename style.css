@@ -30,23 +30,6 @@ body {
     /* overflow: hidden; स्क्रीन को स्क्रॉल होने से रोकेगा */
 }
 
-/* Watermark Logo Logic */
-body::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 55%;
-    height: 55%;
-    background-image: url('logo.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    opacity: 0.08; /* पहले से थोड़ा और सॉफ्ट किया गया है */
-    z-index: -1;
-}
-
 /* Top Navbar (Elegant Gradient) */
 .top-navbar {
     background: linear-gradient(135deg, #f97316, #ea580c);
@@ -71,6 +54,33 @@ body::before {
     opacity: 0.9;
 }
 
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* यह लोगो को दोनों किनारों पर धकेल देगा */
+    width: 100%;
+    padding: 0 10px; /* किनारों से हल्की सी दूरी */
+}
+
+/* Logo Styling */
+.navbar-logo {
+    height: 70px;
+    width: 70px; 
+    object-fit: contain;
+    background-color: transparent; 
+    
+    /* यह कोड लोगो से डिफ़ॉल्ट बॉर्डर, शैडो और मार्जिन को हटा देगा */
+    border: none; 
+    box-shadow: none;
+    filter: none; 
+    margin: 0; 
+}
+
+/* Center Text Alignment */
+.navbar-text {
+    text-align: center; /* टेक्स्ट को सेंटर में रखने के लिए */
+    flex: 1; /* यह टेक्स्ट को दोनों लोगो के बीच की पूरी जगह लेने देगा */
+}
 
 /* Header & Admin Controls */
 header {
