@@ -1,18 +1,18 @@
 // 1. Data Structure for all rounds
 const quizData = {
     "Passing Round": [
-        { text: "पल्लव शक्ति का केन्द्र कौन सा स्थान था?", answer: "कांचीपुरम", time: 15, type: "text" },
-        { text: "किस फारसी विद्वान ने भारत को धरती का स्वर्ग कहा था?", answer: "खुसरो", time: 15, type: "text" },
-        { text: "भारत का सबसे बड़ा नदी द्वीप कौन सा है?", answer: "माजुली", time: 15, type: "text" },
-        { text: "भारत में सबसे अधिक ऊँचाई पर स्थित पावर स्टेशन कहाँ है?", answer: "टिहरी", time: 15, type: "text" },
-        { text: "मीठे पानी की सबसे बड़ी वूलर झील कहाँ स्थित है?", answer: "कश्मीर", time: 15, type: "text" }
+        { text: "बद्रीनाथ किस नदी के किनारे स्थित है?", answer: "अलकनन्दा", time: 15, type: "text" },
+        { text: "कटक किस नदी के किनारे स्थित है?", answer: "महानदी", time: 15, type: "text" },
+        { text: "श्रीनगर किस नदी के किनारे स्थित है?", answer: "झेलम", time: 15, type: "text" },
+        { text: "डिबरूगढ़ किस नदी के तट पर स्थित है?", answer: "ब्रह्मपुत्र", time: 15, type: "text" },
+        { text: "शान्त घाटी (Silent Valley) किस राज्य में स्थित है?", answer: "केरल", time: 15, type: "text" }
     ],
     "Picture Round": [
         { text: "Identify the image", answer: "Ans 1", time: 15, type: "picture", mediaSrc: "img1.jpg" },
         // ... add remaining questions
     ],
     "Video Round": [
-        { text: "Identify the video", answer: "Ans 1", time: 15, type: "video", mediaSrc: "vid1.mp4" },
+        { text: "चंद्रयान-3 चंद्रमा पर कब उतरा?", answer: "23 अगस्त 2023", time: 15, type: "video", mediaSrc: "vid1.mp4" },
         // ... add remaining questions
     ],
     "Audio Round": [
@@ -326,21 +326,70 @@ function handleSubRoundChange() {
 }
 
 // 5. Quiz Execution Logic
+// function loadQuestion() {
+//     if (!currentQuestions || currentQuestions.length === 0) return;
+    
+//     clearInterval(timer);
+//     const q = currentQuestions[currentIndex];
+    
+//     qTracker.textContent = `Question ${currentIndex + 1} of ${currentQuestions.length}`;
+//     qText.textContent = q.text;
+//     aText.textContent = q.answer;
+//     aText.classList.add('hidden');
+    
+//     timeLeft = q.time;
+//     timeDisplay.textContent = timeLeft;
+
+//     // Reset media display
+//     Object.values(mediaElements).forEach(el => el.style.display = "none");
+
+//     // Handle media rendering & auto-timers
+//     if (q.type && mediaElements[q.type]) {
+//         const mediaEl = mediaElements[q.type];
+//         mediaEl.src = q.mediaSrc;
+//         mediaEl.style.display = "block";
+        
+//         if (q.type === "video" || q.type === "audio") {
+//             mediaEl.onended = () => startTimer();
+//         }
+//     }
+// }
+
+// function showAnswer() {
+//     if (currentQuestions.length > 0) {
+//         aText.classList.remove('hidden');
+//         clearInterval(timer); 
+//     }
+// }
+
 function loadQuestion() {
     if (!currentQuestions || currentQuestions.length === 0) return;
     
-    clearInterval(timer);
     const q = currentQuestions[currentIndex];
+    const selectedRound = roundSelect.value;
     
+    // --- Timer Logic Update ---
+    if (selectedRound !== "Rapid Fire") {
+        // नॉर्मल राउंड्स: हर प्रश्न पर टाइमर रुकेगा और नया टाइम सेट होगा
+        clearInterval(timer);
+        timeLeft = q.time;
+        timeDisplay.textContent = timeLeft;
+    } else {
+        // रैपिड फायर राउंड: केवल पहले प्रश्न पर 60 सेकंड सेट होगा
+        if (currentIndex === 0) {
+            clearInterval(timer);
+            timeLeft = 60; // पूरे राउंड के लिए 60 सेकंड
+            timeDisplay.textContent = timeLeft;
+        }
+        // रैपिड फायर में Next दबाने पर टाइमर ना रुकेगा, ना ही रीसेट होगा!
+    }
+
     qTracker.textContent = `Question ${currentIndex + 1} of ${currentQuestions.length}`;
     qText.textContent = q.text;
     aText.textContent = q.answer;
     aText.classList.add('hidden');
     
-    timeLeft = q.time;
-    timeDisplay.textContent = timeLeft;
-
-    // Reset media display
+    // Reset media
     Object.values(mediaElements).forEach(el => el.style.display = "none");
 
     // Handle media rendering & auto-timers
@@ -349,7 +398,9 @@ function loadQuestion() {
         mediaEl.src = q.mediaSrc;
         mediaEl.style.display = "block";
         
+        // --- नया कोड: ब्राउज़र को वीडियो लोड करने के लिए फोर्स करना ---
         if (q.type === "video" || q.type === "audio") {
+            mediaEl.load(); 
             mediaEl.onended = () => startTimer();
         }
     }
@@ -358,7 +409,11 @@ function loadQuestion() {
 function showAnswer() {
     if (currentQuestions.length > 0) {
         aText.classList.remove('hidden');
-        clearInterval(timer); 
+        
+        // रैपिड फायर में 'Show Answer' करने पर टाइमर नहीं रुकना चाहिए
+        if (roundSelect.value !== "Rapid Fire") {
+            clearInterval(timer); 
+        }
     }
 }
 
