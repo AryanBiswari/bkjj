@@ -13,7 +13,10 @@ const quizData = {
     ],
     "Video Round": [
         { text: "चंद्रयान-3 चंद्रमा पर कब उतरा?", answer: "23 अगस्त 2023", time: 15, type: "video", mediaSrc: "vid1.mp4" },
-        // ... add remaining questions
+        { text: "बहारों फूल बरसाओ’ गाना किस फिल्म का है?", answer: "सूरज (1966)", time: 15, type: "video", mediaSrc: "song.mp4" },
+        { text: "भरतनाट्यम किस राज्य का प्रमुख शास्त्रीय नृत्य है?", answer: "तमिलनाडु", time: 15, type: "video", mediaSrc: "dance.mp4" },
+        { text: "धुआँधार जलप्रपात किस शहर के पास है?", answer: "जबलपुर", time: 15, type: "video", mediaSrc: "waterfall.mp4" },
+        { text: "थेय्यम परंपरा भारत के किस राज्य से जुड़ी है?", answer: "केरल", time: 15, type: "video", mediaSrc: "kaantara.mp4" }
     ],
     "Audio Round": [
         { text: "Identify the audio", answer: "Ans 1", time: 15, type: "audio", mediaSrc: "aud1.mp3" },
@@ -324,43 +327,6 @@ function handleSubRoundChange() {
         loadQuestion();
     }
 }
-
-// 5. Quiz Execution Logic
-// function loadQuestion() {
-//     if (!currentQuestions || currentQuestions.length === 0) return;
-    
-//     clearInterval(timer);
-//     const q = currentQuestions[currentIndex];
-    
-//     qTracker.textContent = `Question ${currentIndex + 1} of ${currentQuestions.length}`;
-//     qText.textContent = q.text;
-//     aText.textContent = q.answer;
-//     aText.classList.add('hidden');
-    
-//     timeLeft = q.time;
-//     timeDisplay.textContent = timeLeft;
-
-//     // Reset media display
-//     Object.values(mediaElements).forEach(el => el.style.display = "none");
-
-//     // Handle media rendering & auto-timers
-//     if (q.type && mediaElements[q.type]) {
-//         const mediaEl = mediaElements[q.type];
-//         mediaEl.src = q.mediaSrc;
-//         mediaEl.style.display = "block";
-        
-//         if (q.type === "video" || q.type === "audio") {
-//             mediaEl.onended = () => startTimer();
-//         }
-//     }
-// }
-
-// function showAnswer() {
-//     if (currentQuestions.length > 0) {
-//         aText.classList.remove('hidden');
-//         clearInterval(timer); 
-//     }
-// }
 
 function loadQuestion() {
     if (!currentQuestions || currentQuestions.length === 0) return;

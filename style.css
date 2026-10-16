@@ -28,11 +28,29 @@ body {
     position: relative;
     z-index: 0;
     /* overflow: hidden; स्क्रीन को स्क्रॉल होने से रोकेगा */
+    
+    
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    height: 55%;
+    background-image: url('bgimage.jpg'); /* यह पृष्ठभूमि छवि को जोड़ता है */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.20; /* पहले से थोड़ा और सॉफ्ट किया गया है */
+    z-index: -1;
 }
 
 /* Top Navbar (Elegant Gradient) */
 .top-navbar {
-    background: linear-gradient(135deg, #f97316, #ea580c);
+    background: linear-gradient(135deg, #fddcc3, #ff5700);
     color: #ffffff;
     text-align: center;
     padding: 15px 20px;
