@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bharat Ko Jaano Quiz</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <!-- <nav class="top-navbar">
-        <h2>भारत को जानो (कनिष्ठ वर्ग)</h2>
-        <h3>भारत विकास परिषद शाखा डबरा</h3>
-    </nav> -->
+    <!-- Premium Navbar (Both sides Logo & Center Text) -->
     <nav class="top-navbar">
         <div class="navbar-content">
             <!-- Left Logo -->
-            <img src="logo1.png" alt="Left Logo" class="navbar-logo">
+            <img src="logo.png" alt="Left Logo" class="navbar-logo">
             
             <!-- Center Text -->
             <div class="navbar-text">
@@ -22,8 +25,8 @@
                 <h3>भारत विकास परिषद शाखा डबरा</h3>
             </div>
             
-            <!-- Right Logo (अगर आपके पास दूसरा लोगो है, तो यहाँ उसका नाम बदल दें) -->
-            <img src="swami.jpg" alt="Right Logo" class="navbar-logo">
+            <!-- Right Logo -->
+            <img src="logo.png" alt="Right Logo" class="navbar-logo">
         </div>
     </nav>
     <header>
@@ -63,11 +66,11 @@
         <div id="question-container">
             <h3 id="question-tracker">Question 0 of 0</h3>
             <h1 id="question-text">Select a round to begin.</h1>
-            
+
             <img id="picture-media" src="" alt="Question Image" style="display: none;">
             <video id="video-media" controls style="display: none;"></video>
             <audio id="audio-media" controls style="display: none;"></audio>
-            
+
             <h2 id="answer-text" class="hidden"></h2>
         </div>
 
@@ -90,4 +93,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

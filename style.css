@@ -1,277 +1,380 @@
-/* Google Font Import (Modern & Clean Look) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* =========================================================
+   1. DESIGN TOKENS & BASE SETUP
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --bg-main: #121826;        /* Soft modern dark background */
-    --bg-surface: #1f2937;     /* Lighter dark for header/footer */
-    --theme-orange: #f97316;   /* Aesthetic saffron/orange */
-    --theme-orange-hover: #ea580c;
-    --text-main: #f8fafc;
-    --text-muted: #9ca3af;
-    --success-green: #10b981;
-    --border-radius: 12px;
+    /* Brand Colors - Cultural Saffron/Orange */
+    --color-primary: #FF8C00;
+    --color-primary-hover: #FF7300;
+    --color-primary-glow: rgba(255, 140, 0, 0.4);
+    
+    /* Surface Colors - Deep Slate / OLED optimized */
+    --color-bg-base: #07090F;
+    --color-bg-surface: rgba(20, 25, 35, 0.75);
+    --color-bg-panel: rgba(255, 255, 255, 0.03);
+    
+    /* Functional Colors */
+    --color-success: #10B981;
+    --color-success-glow: rgba(16, 185, 129, 0.2);
+    --color-error: #EF4444;
+    --color-timer-bg: rgba(239, 68, 68, 0.15);
+    
+    /* Text Colors */
+    --color-text-main: #F8FAFC;
+    --color-text-muted: #94A3B8;
+    
+    /* Structural */
+    --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+    --border-radius-lg: 16px;
+    --border-radius-md: 10px;
+    --border-radius-pill: 50px;
+    
+    /* Shadows */
+    --shadow-elevation-1: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 30px var(--color-primary-glow);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-    background-color: var(--bg-main);
-    color: var(--text-main);
+    background-color: var(--color-bg-base);
+    color: var(--color-text-main);
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
     z-index: 0;
-    /* overflow: hidden; स्क्रीन को स्क्रॉल होने से रोकेगा */
-    
-    
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255,140,0,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 100%, rgba(16,185,129,0.05) 0%, transparent 50%);
 }
 
+/* Watermark */
 body::before {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 55%;
-    height: 55%;
-    background-image: url('bgimage.jpg'); /* यह पृष्ठभूमि छवि को जोड़ता है */
+    width: 50%;
+    height: 50%;
+    background-image: url('logo.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    opacity: 0.20; /* पहले से थोड़ा और सॉफ्ट किया गया है */
+    opacity: 0.50;
     z-index: -1;
+    pointer-events: none;
 }
 
-/* Top Navbar (Elegant Gradient) */
+/* =========================================================
+   2. NAVBAR & HEADER (Broadcast Style)
+   ========================================================= */
 .top-navbar {
-    background: linear-gradient(135deg, #fddcc3, #ff5700);
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 20px;
-    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+    background: linear-gradient(90deg, #111827 0%, #1F2937 50%, #111827 100%);
+    border-bottom: var(--border-subtle);
+    padding: 12px 30px;
+    box-shadow: var(--shadow-elevation-1);
     z-index: 10;
-}
-
-.top-navbar h2 {
-    margin: 0;
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.top-navbar h3 {
-    margin: 4px 0 0 0;
-    font-size: 18px;
-    font-weight: 400;
-    opacity: 0.9;
 }
 
 .navbar-content {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* यह लोगो को दोनों किनारों पर धकेल देगा */
+    justify-content: space-between;
     width: 100%;
-    padding: 0 10px; /* किनारों से हल्की सी दूरी */
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
-/* Logo Styling */
 .navbar-logo {
-    height: 70px;
-    width: 70px; 
+    height: 65px;
+    width: 65px;
     object-fit: contain;
-    background-color: transparent; 
-    
-    /* यह कोड लोगो से डिफ़ॉल्ट बॉर्डर, शैडो और मार्जिन को हटा देगा */
-    border: none; 
+    border: none;
     box-shadow: none;
-    filter: none; 
-    margin: 0; 
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
 }
 
-/* Center Text Alignment */
 .navbar-text {
-    text-align: center; /* टेक्स्ट को सेंटर में रखने के लिए */
-    flex: 1; /* यह टेक्स्ट को दोनों लोगो के बीच की पूरी जगह लेने देगा */
+    text-align: center;
+    flex: 1;
 }
 
-/* Header & Admin Controls */
+.top-navbar h2 {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FFB75E, #ED8F03);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+.top-navbar h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: var(--bg-surface);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    border-bottom: 2px solid #374151;
+    background: var(--color-bg-panel);
+    backdrop-filter: blur(12px);
+    border-bottom: var(--border-subtle);
 }
 
+/* Dropdowns */
 .admin-controls {
     display: flex;
     gap: 15px;
-    align-items: center;
 }
 
 select {
-    padding: 10px 15px;
+    appearance: none;
+    padding: 12px 35px 12px 15px;
     font-size: 16px;
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    border: 1px solid #4b5563;
-    border-radius: 8px;
-    outline: none;
+    font-weight: 500;
+    background-color: rgba(15, 23, 42, 0.8);
+    color: var(--color-text-main);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    border-radius: var(--border-radius-md);
     cursor: pointer;
     transition: all 0.3s ease;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF8C00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
 }
 
-select:focus {
-    border-color: var(--theme-orange);
-    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+select:focus, select:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.2);
+    outline: none;
 }
 
+/* Timer */
 #timer-display {
-    color: #ef4444;
-    font-size: 28px;
-    font-weight: 600;
-    background: rgba(239, 68, 68, 0.1);
-    padding: 8px 20px;
-    border-radius: 30px;
+    color: var(--color-error);
+    font-size: 32px;
+    font-weight: 700;
+    background: var(--color-timer-bg);
+    padding: 10px 25px;
+    border-radius: var(--border-radius-pill);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.1);
+    font-variant-numeric: tabular-nums; /* Keeps numbers from shifting */
 }
 
-/* Main Content Area */
+/* =========================================================
+   3. MAIN CONTENT (Stage Presentation Area)
+   ========================================================= */
 main {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 40px;
     width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 #question-container {
+    background: var(--color-bg-surface);
+    backdrop-filter: blur(16px);
+    border: var(--border-subtle);
+    border-radius: var(--border-radius-lg);
+    padding: 50px;
+    width: 100%;
+    box-shadow: var(--shadow-elevation-1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    flex: 1; /* Yeh container ko poori screen ki height lene dega jisse text bilkul bich mein aayega */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top glow line for card */
+#question-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
 }
 
 #question-tracker {
-    color: var(--theme-orange);
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    letter-spacing: 1.5px;
+    color: var(--color-primary);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    text-align: center;
+    background: rgba(255, 140, 0, 0.1);
+    padding: 6px 16px;
+    border-radius: var(--border-radius-pill);
 }
 
 #question-text {
-    font-size: 42px;
-    font-weight: 600;
-    line-height: 1.5;
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.4;
     margin: 0 auto 30px auto;
-    max-width: 90%;
-    text-align: center; /* Multi-line text ko bilkul center mein rakhne ke liye */
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-align: center;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    max-width: 95%;
 }
 
 #answer-text {
-    font-size: 34px;
-    font-weight: 500;
-    color: var(--success-green);
-    margin-top: 20px;
-    background: rgba(16, 185, 129, 0.1);
-    padding: 10px 30px;
-    border-radius: 8px;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--color-success);
+    margin-top: 30px;
+    background: var(--color-success-glow);
+    padding: 15px 40px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    animation: revealUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hidden {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    display: none !important;
 }
 
 /* Media Elements */
 img, video {
-    max-width: 60%;
-    max-height: 350px;
-    margin-bottom: 20px;
-    border: 3px solid var(--bg-surface);
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    max-width: 70%;
+    max-height: 400px;
+    margin-bottom: 25px;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-/* Modern Buttons */
+audio {
+    width: 50%;
+    margin-bottom: 20px;
+    filter: invert(0.9) hue-rotate(180deg); /* Modernizes native audio player */
+}
+
+/* =========================================================
+   4. CONTROLS (Micro-interactions & Polish)
+   ========================================================= */
 .controls {
-    margin-top: 40px;
+    margin-top: 35px;
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 button {
-    background-color: var(--theme-orange);
-    color: #ffffff;
-    border: none;
-    padding: 12px 28px;
+    background-color: transparent;
+    color: var(--color-text-main);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 14px 32px;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 30px; /* Pill shape for aesthetic look */
-    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
-    transition: all 0.3s ease;
+    border-radius: var(--border-radius-pill);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
 }
 
 button:hover {
-    background-color: var(--theme-orange-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(249, 115, 22, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
 }
 
 button:active {
     transform: translateY(1px);
 }
 
-/* Aesthetic Scoreboard (Footer) */
+/* Primary Action Button (Start Timer) */
+#start-timer-btn {
+    background-color: var(--color-primary);
+    border: none;
+    color: #000;
+    box-shadow: 0 4px 15px var(--color-primary-glow);
+}
+
+#start-timer-btn:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: 0 6px 20px var(--color-primary-glow);
+}
+
+/* =========================================================
+   5. SCOREBOARD (Lower-Third Graphics Style)
+   ========================================================= */
 footer {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    background-color: var(--bg-surface);
-    border-top: 1px solid #374151;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding: 25px 40px;
+    background: linear-gradient(0deg, rgba(7, 9, 15, 1) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border-top: var(--border-subtle);
+    backdrop-filter: blur(10px);
 }
 
 .team {
-    background-color: var(--bg-main);
-    padding: 15px 30px;
-    border-radius: var(--border-radius);
-    border: 1px solid #374151;
-    font-size: 20px;
-    font-weight: 500;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 15px 20px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 150px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.team span {
+.team:hover {
+    border-color: rgba(255, 140, 0, 0.3);
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.team span:first-child {
     font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 5px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
 .score {
-    font-size: 32px !important;
-    font-weight: 700;
-    color: var(--success-green) !important;
-    margin-top: 5px;
+    font-size: 38px !important;
+    font-weight: 800;
+    color: var(--color-primary) !important;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 10px rgba(255,140,0,0.2);
+}
+
+/* =========================================================
+   6. ANIMATIONS
+   ========================================================= */
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

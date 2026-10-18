@@ -8,7 +8,11 @@ const quizData = {
         { text: "शान्त घाटी (Silent Valley) किस राज्य में स्थित है?", answer: "केरल", time: 15, type: "text" }
     ],
     "Picture Round": [
-        { text: "Identify the image", answer: "Ans 1", time: 15, type: "picture", mediaSrc: "img1.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध भारतीय क्रांतिकारी का है?", answer: "रासबिहारी बोस", time: 15, type: "picture", mediaSrc: "Rash Behari Bose.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध भारतीय चित्रकला शैली को दर्शाता है?", answer: "मधुबनी चित्रकला", time: 15, type: "picture", mediaSrc: "madhubani.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध भारतीय वैज्ञानिक का है?", answer: "विक्रम साराभाई", time: 15, type: "picture", mediaSrc: "vikramsarabhai.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध भारतीय वैज्ञानिक का है?", answer: "होमी जहाँगीर भाभा", time: 15, type: "picture", mediaSrc: "homi.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध ऐतिहासिक स्थल का है?", answer: "असीरगढ़ का किला", time: 15, type: "picture", mediaSrc: "fort.jpg" }
         // ... add remaining questions
     ],
     "Video Round": [
@@ -372,13 +376,28 @@ function loadQuestion() {
     }
 }
 
+// function showAnswer() {
+//     if (currentQuestions.length > 0) {
+//         aText.classList.remove('hidden');
+        
+//         // रैपिड फायर में 'Show Answer' करने पर टाइमर नहीं रुकना चाहिए
+//         if (roundSelect.value !== "Rapid Fire") {
+//             clearInterval(timer); 
+//         }
+//     }
+// }
 function showAnswer() {
     if (currentQuestions.length > 0) {
-        aText.classList.remove('hidden');
-        
-        // रैपिड फायर में 'Show Answer' करने पर टाइमर नहीं रुकना चाहिए
-        if (roundSelect.value !== "Rapid Fire") {
-            clearInterval(timer); 
+        // Toggle Logic: अगर उत्तर छुपा है, तो दिखाओ, वरना छुपा दो
+        if (aText.classList.contains('hidden')) {
+            aText.classList.remove('hidden');
+            
+            // रैपिड फायर में 'Show Answer' करने पर टाइमर नहीं रुकना चाहिए
+            if (roundSelect.value !== "Rapid Fire") {
+                clearInterval(timer); 
+            }
+        } else {
+            aText.classList.add('hidden'); // दोबारा दबाने पर उत्तर छुप जाएगा
         }
     }
 }
@@ -418,8 +437,36 @@ function updateScore(teamLetter, points) {
 }
 
 // Keyboard Scoring (Keys 1-5 for Teams A-E)
+// document.addEventListener('keydown', (event) => {
+//     // We use event.code (Digit1, Digit2) to catch the key even if Shift is pressed
+//     const keyMap = { 
+//         'Digit1': 'A', 'Numpad1': 'A',
+//         'Digit2': 'B', 'Numpad2': 'B',
+//         'Digit3': 'C', 'Numpad3': 'C',
+//         'Digit4': 'D', 'Numpad4': 'D',
+//         'Digit5': 'E', 'Numpad5': 'E'
+//     };
+    
+//     if (keyMap[event.code]) {
+//         let teamLetter = keyMap[event.code];
+        
+//         // Shift + Key subtracts 5, just Key adds 10
+//         if (event.shiftKey) {
+//             updateScore(teamLetter, -5);
+//         } else {
+//             updateScore(teamLetter, 10);
+//         }
+//     }
+// });
+
+// Keyboard Scoring and Controls
 document.addEventListener('keydown', (event) => {
-    // We use event.code (Digit1, Digit2) to catch the key even if Shift is pressed
+    // अगर होस्ट किसी Dropdown (Select) में कुछ चुन रहा है, तो शॉर्टकट ट्रिगर ना हों
+    if (event.target.tagName === 'SELECT' || event.target.tagName === 'INPUT') {
+        return;
+    }
+
+    // --- 1. Scoring Logic (Keys 1-5 for Teams A-E) ---
     const keyMap = { 
         'Digit1': 'A', 'Numpad1': 'A',
         'Digit2': 'B', 'Numpad2': 'B',
@@ -430,12 +477,29 @@ document.addEventListener('keydown', (event) => {
     
     if (keyMap[event.code]) {
         let teamLetter = keyMap[event.code];
-        
-        // Shift + Key subtracts 5, just Key adds 10
         if (event.shiftKey) {
             updateScore(teamLetter, -5);
         } else {
             updateScore(teamLetter, 10);
         }
+    }
+
+    // --- 2. Quiz Controls Shortcuts ---
+    if (event.code === 'ArrowRight') {
+        // Right Arrow (➡) -> Next Question
+        nextQuestion();
+    } 
+    else if (event.code === 'ArrowLeft') {
+        // Left Arrow (⬅) -> Previous Question
+        prevQuestion();
+    } 
+    else if (event.code === 'Space' || event.code === 'Enter') {
+        // Spacebar या Enter -> Show/Hide Answer (Toggle)
+        event.preventDefault(); // Space दबाने पर स्क्रीन नीचे स्क्रॉल होने से रोकेगा
+        showAnswer();
+    } 
+    else if (event.code === 'KeyT') {
+        // 'T' बटन -> Start Timer
+        startTimer();
     }
 });
