@@ -24,7 +24,10 @@ const quizData = {
     ],
     "Audio Round": [
         { text: "ऑडियो में किस प्रकार के वाद्य यंत्र (ताल वाद्य/पर्कशन) का प्रयोग किया गया है?", answer: "तबला", time: 15, type: "audio", mediaSrc: "tabla.mp3" },
-        // ... add remaining questions
+        { text: "ऑडियो में किस प्रसिद्ध राजनीतिज्ञ की आवाज़ है?", answer: "इंदिरा गांधी", time: 15, type: "audio", mediaSrc: "indra.mp3" },
+        { text: "यह गीत किस ऐतिहासिक सेना का आधिकारिक मार्चिंग सॉन्ग (कदम ताल गीत) था?", answer: "आज़ाद हिन्द फ़ौज (INA)", time: 15, type: "audio", mediaSrc: "azad.mp3" },
+        { text: "इस ऑडियो क्लिप में शुरुआत में बजने वाला मुख्य तंत्री (स्ट्रिंग्ड) वाद्य यंत्र कौन सा है?", answer: "सितार", time: 15, type: "audio", mediaSrc: "sitar.mp3" },
+        { text: "यह गीत मुख्य रूप से किस भाषा में लिखा गया है?", answer: "बंगाली", time: 15, type: "audio", mediaSrc: "ekla.mp3" }
     ],
     
     // Optional Round - Grouped by Topic
