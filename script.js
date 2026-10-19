@@ -23,7 +23,7 @@ const quizData = {
         { text: "थेय्यम परंपरा भारत के किस राज्य से जुड़ी है?", answer: "केरल", time: 15, type: "video", mediaSrc: "kaantara.mp4" }
     ],
     "Audio Round": [
-        { text: "Identify the audio", answer: "Ans 1", time: 15, type: "audio", mediaSrc: "aud1.mp3" },
+        { text: "ऑडियो में किस प्रकार के वाद्य यंत्र (ताल वाद्य/पर्कशन) का प्रयोग किया गया है?", answer: "तबला", time: 15, type: "audio", mediaSrc: "tabla.mp3" },
         // ... add remaining questions
     ],
     
@@ -436,28 +436,7 @@ function updateScore(teamLetter, points) {
     document.getElementById(`score-${teamLetter}`).textContent = scoresData[teamLetter];
 }
 
-// Keyboard Scoring (Keys 1-5 for Teams A-E)
-// document.addEventListener('keydown', (event) => {
-//     // We use event.code (Digit1, Digit2) to catch the key even if Shift is pressed
-//     const keyMap = { 
-//         'Digit1': 'A', 'Numpad1': 'A',
-//         'Digit2': 'B', 'Numpad2': 'B',
-//         'Digit3': 'C', 'Numpad3': 'C',
-//         'Digit4': 'D', 'Numpad4': 'D',
-//         'Digit5': 'E', 'Numpad5': 'E'
-//     };
-    
-//     if (keyMap[event.code]) {
-//         let teamLetter = keyMap[event.code];
-        
-//         // Shift + Key subtracts 5, just Key adds 10
-//         if (event.shiftKey) {
-//             updateScore(teamLetter, -5);
-//         } else {
-//             updateScore(teamLetter, 10);
-//         }
-//     }
-// });
+
 
 // Keyboard Scoring and Controls
 document.addEventListener('keydown', (event) => {
