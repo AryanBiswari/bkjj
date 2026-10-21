@@ -341,20 +341,17 @@ function loadQuestion() {
     const q = currentQuestions[currentIndex];
     const selectedRound = roundSelect.value;
     
-    // --- Timer Logic Update ---
+    // --- Timer Setup ---
     if (selectedRound !== "Rapid Fire") {
-        // नॉर्मल राउंड्स: हर प्रश्न पर टाइमर रुकेगा और नया टाइम सेट होगा
         clearInterval(timer);
         timeLeft = q.time;
         timeDisplay.textContent = timeLeft;
     } else {
-        // रैपिड फायर राउंड: केवल पहले प्रश्न पर 60 सेकंड सेट होगा
         if (currentIndex === 0) {
             clearInterval(timer);
-            timeLeft = 60; // पूरे राउंड के लिए 60 सेकंड
+            timeLeft = 60; // रैपिड फायर के लिए 60 सेकंड
             timeDisplay.textContent = timeLeft;
         }
-        // रैपिड फायर में Next दबाने पर टाइमर ना रुकेगा, ना ही रीसेट होगा!
     }
 
     qTracker.textContent = `Question ${currentIndex + 1} of ${currentQuestions.length}`;
@@ -365,16 +362,33 @@ function loadQuestion() {
     // Reset media
     Object.values(mediaElements).forEach(el => el.style.display = "none");
 
-    // Handle media rendering & auto-timers
+    let isVideoOrAudio = false;
+
+    // Handle media rendering
     if (q.type && mediaElements[q.type]) {
         const mediaEl = mediaElements[q.type];
         mediaEl.src = q.mediaSrc;
         mediaEl.style.display = "block";
         
-        // --- नया कोड: ब्राउज़र को वीडियो लोड करने के लिए फोर्स करना ---
+        // अगर वीडियो या ऑडियो है, तो खत्म होने पर टाइमर चलाएं
         if (q.type === "video" || q.type === "audio") {
+            isVideoOrAudio = true;
             mediaEl.load(); 
             mediaEl.onended = () => startTimer();
+        }
+    }
+
+    // --- AUTO START TIMER LOGIC ---
+    // अगर प्रश्न टेक्स्ट या पिक्चर है, तो तुरंत टाइमर शुरू कर दें
+    if (!isVideoOrAudio) {
+        if (selectedRound === "Rapid Fire") {
+            // रैपिड फायर में सिर्फ पहले प्रश्न पर टाइमर स्टार्ट करें, बाकी में बैकग्राउंड में चलता रहेगा
+            if (currentIndex === 0) {
+                startTimer();
+            }
+        } else {
+            // Passing, Optional और Picture राउंड में तुरंत स्टार्ट करें
+            startTimer();
         }
     }
 }
