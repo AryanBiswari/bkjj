@@ -393,16 +393,6 @@ function loadQuestion() {
     }
 }
 
-// function showAnswer() {
-//     if (currentQuestions.length > 0) {
-//         aText.classList.remove('hidden');
-        
-//         // रैपिड फायर में 'Show Answer' करने पर टाइमर नहीं रुकना चाहिए
-//         if (roundSelect.value !== "Rapid Fire") {
-//             clearInterval(timer); 
-//         }
-//     }
-// }
 function showAnswer() {
     if (currentQuestions.length > 0) {
         // Toggle Logic: अगर उत्तर छुपा है, तो दिखाओ, वरना छुपा दो
