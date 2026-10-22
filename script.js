@@ -239,7 +239,7 @@ let currentQuestions = [];
 let currentIndex = 0;
 let timer;
 let timeLeft = 0;
-
+let currentMedia = { type: "", src: "" };
 // Updated Scores Object for 5 Teams (A, B, C, D, E)
 let scoresData = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0 };
 
@@ -357,38 +357,110 @@ function loadQuestion() {
     qText.textContent = q.text;
     aText.textContent = q.answer;
     aText.classList.add('hidden');
+
+    
     
     // Reset media
     Object.values(mediaElements).forEach(el => el.style.display = "none");
 
-    let isVideoOrAudio = false;
+    // let isVideoOrAudio = false;
 
-    // Handle media rendering
-    if (q.type && mediaElements[q.type]) {
-        const mediaEl = mediaElements[q.type];
-        mediaEl.src = q.mediaSrc;
-        mediaEl.style.display = "block";
+    // // Handle media rendering
+    // if (q.type && mediaElements[q.type]) {
+    //     const mediaEl = mediaElements[q.type];
+    //     mediaEl.src = q.mediaSrc;
+    //     mediaEl.style.display = "block";
         
-        // अगर वीडियो या ऑडियो है, तो खत्म होने पर टाइमर चलाएं
-        if (q.type === "video" || q.type === "audio") {
-            isVideoOrAudio = true;
-            mediaEl.load(); 
-            mediaEl.onended = () => startTimer();
-        }
-    }
+    //     // अगर वीडियो या ऑडियो है, तो खत्म होने पर टाइमर चलाएं
+    //     if (q.type === "video" || q.type === "audio") {
+    //         isVideoOrAudio = true;
+    //         mediaEl.load(); 
+    //         mediaEl.onended = () => startTimer();
+    //     }
+    // }
 
-    // --- AUTO START TIMER LOGIC ---
-    // अगर प्रश्न टेक्स्ट या पिक्चर है, तो तुरंत टाइमर शुरू कर दें
-    if (!isVideoOrAudio) {
+    // // --- AUTO START TIMER LOGIC ---
+    // // अगर प्रश्न टेक्स्ट या पिक्चर है, तो तुरंत टाइमर शुरू कर दें
+    // if (!isVideoOrAudio) {
+    //     if (selectedRound === "Rapid Fire") {
+    //         // रैपिड फायर में सिर्फ पहले प्रश्न पर टाइमर स्टार्ट करें, बाकी में बैकग्राउंड में चलता रहेगा
+    //         if (currentIndex === 0) {
+    //             startTimer();
+    //         }
+    //     } else {
+    //         // Passing, Optional और Picture राउंड में तुरंत स्टार्ट करें
+    //         startTimer();
+    //     }
+    // }
+
+    // नया "Show Media" बटन खोजें और उसे पहले छुपा दें
+    const mediaBtn = document.getElementById('show-media-btn');
+    if (mediaBtn) mediaBtn.classList.add('hidden');
+
+    // चेक करें कि प्रश्न में कोई मीडिया है या नहीं
+    let hasMedia = (q.type === "video" || q.type === "audio" || q.type === "picture");
+
+    // --- 3. Media & Auto-Timer Logic ---
+    if (hasMedia) {
+        // अगर मीडिया है, तो डेटा को मोडल के लिए सेव करें और "Show Media" बटन दिखाएं
+        currentMedia.type = q.type;
+        currentMedia.src = q.mediaSrc;
+        
+        if (mediaBtn) mediaBtn.classList.remove('hidden');
+        
+        // नोट: यहाँ टाइमर स्टार्ट नहीं होगा। टाइमर तब स्टार्ट होगा जब आप `closeMediaModal()` कॉल करेंगे।
+    } else {
+        // अगर कोई मीडिया नहीं है (सिर्फ टेक्स्ट है), तो तुरंत टाइमर स्टार्ट कर दें
         if (selectedRound === "Rapid Fire") {
-            // रैपिड फायर में सिर्फ पहले प्रश्न पर टाइमर स्टार्ट करें, बाकी में बैकग्राउंड में चलता रहेगा
+            // रैपिड फायर में सिर्फ पहले प्रश्न पर
             if (currentIndex === 0) {
                 startTimer();
             }
         } else {
-            // Passing, Optional और Picture राउंड में तुरंत स्टार्ट करें
+            // बाकी सभी नॉर्मल टेक्स्ट राउंड्स में तुरंत स्टार्ट
             startTimer();
         }
+    }
+}
+
+function openMediaModal() {
+    document.getElementById('media-modal').classList.remove('hidden');
+    const modalPic = document.getElementById('modal-picture');
+    const modalVid = document.getElementById('modal-video');
+    const modalAud = document.getElementById('modal-audio');
+    
+    modalPic.style.display = "none";
+    modalVid.style.display = "none";
+    modalAud.style.display = "none";
+
+    if (currentMedia.type === "picture") {
+        modalPic.src = currentMedia.src;
+        modalPic.style.display = "block";
+    } else if (currentMedia.type === "video") {
+        modalVid.src = currentMedia.src;
+        modalVid.style.display = "block";
+        modalVid.load();
+        modalVid.play();
+    } else if (currentMedia.type === "audio") {
+        modalAud.src = currentMedia.src;
+        modalAud.style.display = "block";
+        modalAud.load();
+        modalAud.play();
+    }
+}
+
+function closeMediaModal() {
+    document.getElementById('media-modal').classList.add('hidden');
+    const modalVid = document.getElementById('modal-video');
+    const modalAud = document.getElementById('modal-audio');
+    
+    // Video/Audio band karein
+    modalVid.pause();
+    modalAud.pause();
+    
+    // Jaise hi KBC style modal band hoga, timer shuru ho jayega!
+    if (roundSelect.value !== "Rapid Fire") {
+        startTimer();
     }
 }
 

@@ -79,8 +79,17 @@
             <button onclick="prevQuestion()">Previous</button>
             <button onclick="showAnswer()">Show Answer</button>
             <!-- <button id="start-timer-btn" onclick="startTimer()">Start Timer</button> -->
+            <button id="show-media-btn" class="hidden" onclick="openMediaModal()">🎬 Show Media</button>
             <button onclick="nextQuestion()">Next</button>
         </div>
+        <div id="media-modal" class="hidden">
+        <div class="media-modal-content">
+            <button class="close-media-btn" onclick="closeMediaModal()">✖ Close & Start Timer</button>
+            <img id="modal-picture" src="" style="display: none;">
+            <video id="modal-video" controls style="display: none;"></video>
+            <audio id="modal-audio" controls style="display: none;"></audio>
+        </div>
+    </div>
     </main>
 
     <!-- Clean Footer with no buttons -->
