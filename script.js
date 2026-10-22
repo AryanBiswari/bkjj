@@ -1,121 +1,120 @@
 // 1. Data Structure for all rounds
 const quizData = {
     "Passing Round": [
-        { text: "बद्रीनाथ किस नदी के किनारे स्थित है?", answer: "अलकनन्दा", time: 15, type: "text" },
-        { text: "कटक किस नदी के किनारे स्थित है?", answer: "महानदी", time: 15, type: "text" },
-        { text: "श्रीनगर किस नदी के किनारे स्थित है?", answer: "झेलम", time: 15, type: "text" },
-        { text: "डिबरूगढ़ किस नदी के तट पर स्थित है?", answer: "ब्रह्मपुत्र", time: 15, type: "text" },
-        { text: "शान्त घाटी (Silent Valley) किस राज्य में स्थित है?", answer: "केरल", time: 15, type: "text" }
+        { text: "बद्रीनाथ किस नदी के किनारे स्थित है?", answer: "अलकनन्दा", time: 20, type: "text" },
+        { text: "कटक किस नदी के किनारे स्थित है?", answer: "महानदी", time: 20, type: "text" },
+        { text: "श्रीनगर किस नदी के किनारे स्थित है?", answer: "झेलम", time: 20, type: "text" },
+        { text: "डिबरूगढ़ किस नदी के तट पर स्थित है?", answer: "ब्रह्मपुत्र", time: 20, type: "text" },
+        { text: "शान्त घाटी (Silent Valley) किस राज्य में स्थित है?", answer: "केरल", time: 20, type: "text" }
     ],
     "Picture Round": [
-        { text: "यह चित्र किस प्रसिद्ध भारतीय क्रांतिकारी का है?", answer: "रासबिहारी बोस", time: 15, type: "picture", mediaSrc: "Rash Behari Bose.jpg" },
-        { text: "यह चित्र किस प्रसिद्ध भारतीय चित्रकला शैली को दर्शाता है?", answer: "मधुबनी चित्रकला", time: 15, type: "picture", mediaSrc: "madhubani.jpg" },
-        { text: "यह चित्र किस प्रसिद्ध भारतीय वैज्ञानिक का है?", answer: "विक्रम साराभाई", time: 15, type: "picture", mediaSrc: "vikramsarabhai.jpg" },
-        { text: "यह चित्र किस प्रसिद्ध भारतीय वैज्ञानिक का है?", answer: "होमी जहाँगीर भाभा", time: 15, type: "picture", mediaSrc: "homi.jpg" },
-        { text: "यह चित्र किस प्रसिद्ध ऐतिहासिक स्थल का है?", answer: "असीरगढ़ का किला", time: 15, type: "picture", mediaSrc: "fort.jpg" }
-        // ... add remaining questions
+        { text: "यह चित्र किस प्रसिद्ध भारतीय क्रांतिकारी का है?", answer: "रासबिहारी बोस", time: 20, type: "picture", mediaSrc: "images/Rash Behari Bose.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध भारतीय चित्रकला शैली को दर्शाता है?", answer: "मधुबनी चित्रकला", time: 20, type: "picture", mediaSrc: "images/madhubani.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध भारतीय वैज्ञानिक का है?", answer: "विक्रम साराभाई", time: 20, type: "picture", mediaSrc: "images/vikramsarabhai.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध भारतीय वैज्ञानिक का है?", answer: "होमी जहाँगीर भाभा", time: 20, type: "picture", mediaSrc: "images/homi.jpg" },
+        { text: "यह चित्र किस प्रसिद्ध ऐतिहासिक स्थल का है?", answer: "असीरगढ़ का किला", time: 20, type: "picture", mediaSrc: "images/fort.jpg" }
     ],
     "Video Round": [
-        { text: "चंद्रयान-3 चंद्रमा पर कब उतरा?", answer: "23 अगस्त 2023", time: 15, type: "video", mediaSrc: "vid1.mp4" },
-        { text: "बहारों फूल बरसाओ’ गाना किस फिल्म का है?", answer: "सूरज (1966)", time: 15, type: "video", mediaSrc: "song.mp4" },
-        { text: "भरतनाट्यम किस राज्य का प्रमुख शास्त्रीय नृत्य है?", answer: "तमिलनाडु", time: 15, type: "video", mediaSrc: "dance.mp4" },
-        { text: "धुआँधार जलप्रपात किस शहर के पास है?", answer: "जबलपुर", time: 15, type: "video", mediaSrc: "waterfall.mp4" },
-        { text: "थेय्यम परंपरा भारत के किस राज्य से जुड़ी है?", answer: "केरल", time: 15, type: "video", mediaSrc: "kaantara.mp4" }
+        { text: "चंद्रयान-3 चंद्रमा पर कब उतरा?", answer: "23 अगस्त 2023", time: 20, type: "video", mediaSrc: "videos/vid1.mp4" },
+        { text: "बहारों फूल बरसाओ’ गाना किस फिल्म का है?", answer: "सूरज (1966)", time: 20, type: "video", mediaSrc: "videos/song.mp4" },
+        { text: "भरतनाट्यम किस राज्य का प्रमुख शास्त्रीय नृत्य है?", answer: "तमिलनाडु", time: 20, type: "video", mediaSrc: "videos/dance.mp4" },
+        { text: "धुआँधार जलप्रपात किस शहर के पास है?", answer: "जबलपुर", time: 20, type: "video", mediaSrc: "videos/waterfall.mp4" },
+        { text: "थेय्यम परंपरा भारत के किस राज्य से जुड़ी है?", answer: "केरल", time: 20, type: "video", mediaSrc: "videos/kaantara.mp4" }
     ],
     "Audio Round": [
-        { text: "ऑडियो में किस प्रकार के वाद्य यंत्र (ताल वाद्य/पर्कशन) का प्रयोग किया गया है?", answer: "तबला", time: 15, type: "audio", mediaSrc: "tabla.mp3" },
-        { text: "ऑडियो में किस प्रसिद्ध राजनीतिज्ञ की आवाज़ है?", answer: "इंदिरा गांधी", time: 15, type: "audio", mediaSrc: "indra.mp3" },
-        { text: "यह गीत किस ऐतिहासिक सेना का आधिकारिक मार्चिंग सॉन्ग (कदम ताल गीत) था?", answer: "आज़ाद हिन्द फ़ौज (INA)", time: 15, type: "audio", mediaSrc: "azad.mp3" },
-        { text: "इस ऑडियो क्लिप में शुरुआत में बजने वाला मुख्य तंत्री (स्ट्रिंग्ड) वाद्य यंत्र कौन सा है?", answer: "सितार", time: 15, type: "audio", mediaSrc: "sitar.mp3" },
-        { text: "यह गीत मुख्य रूप से किस भाषा में लिखा गया है?", answer: "बंगाली", time: 15, type: "audio", mediaSrc: "ekla.mp3" }
+        { text: "ऑडियो में किस प्रकार के वाद्य यंत्र (ताल वाद्य/पर्कशन) का प्रयोग किया गया है?", answer: "तबला", time: 20, type: "audio", mediaSrc: "audios/tabla.mp3" },
+        { text: "ऑडियो में किस प्रसिद्ध राजनीतिज्ञ की आवाज़ है?", answer: "इंदिरा गांधी", time: 20, type: "audio", mediaSrc: "audios/indra.mp3" },
+        { text: "यह गीत किस ऐतिहासिक सेना का आधिकारिक मार्चिंग सॉन्ग (कदम ताल गीत) था?", answer: "आज़ाद हिन्द फ़ौज (INA)", time: 20, type: "audio", mediaSrc: "audios/azad.mp3" },
+        { text: "इस ऑडियो क्लिप में शुरुआत में बजने वाला मुख्य तंत्री (स्ट्रिंग्ड) वाद्य यंत्र कौन सा है?", answer: "सितार", time: 20, type: "audio", mediaSrc: "audios/sitar.mp3" },
+        { text: "यह गीत मुख्य रूप से किस भाषा में लिखा गया है?", answer: "बंगाली", time: 20, type: "audio", mediaSrc: "audios/ekla.mp3" }
     ],
     
     // Optional Round - Grouped by Topic
     "Optional Round": {
         "Dharam Sanskriti": {
             "Team A": [
-                { text: "सीता जी के पालनहार पिता (मिथिला के राजा) कौन थे?", answer: "जनक", time: 15, type: "text" }
+                { text: "सीता जी के पालनहार पिता (मिथिला के राजा) कौन थे?", answer: "जनक", time: 20, type: "text" }
             ],
             "Team B": [
-                { text: "आर्य समाज की स्थापना किसने की थी?", answer: "दयानन्द", time: 15, type: "text" }
+                { text: "आर्य समाज की स्थापना किसने की थी?", answer: "दयानन्द", time: 20, type: "text" }
             ],
             "Team C": [
-                { text: "भगवत्गीता की प्रसिद्ध टीका 'ज्ञानेश्वरी' किसने लिखी थी?", answer: "ज्ञानेश्वर", time: 15, type: "text" }
+                { text: "भगवत्गीता की प्रसिद्ध टीका 'ज्ञानेश्वरी' किसने लिखी थी?", answer: "ज्ञानेश्वर", time: 20, type: "text" }
             ],
             "Team D": [
-                { text: "सन्त तुकाराम किस राज्य के प्रसिद्ध वैष्णव संत थे?", answer: "महाराष्ट्र", time: 15, type: "text" }
+                { text: "सन्त तुकाराम किस राज्य के प्रसिद्ध वैष्णव संत थे?", answer: "महाराष्ट्र", time: 20, type: "text" }
             ],
             "Team E": [
-                { text: "असम में भागवत धर्म का प्रचार-प्रसार करने वाले प्रसिद्ध संत कौन थे?", answer: "शंकरदेव", time: 15, type: "text" }
+                { text: "असम में भागवत धर्म का प्रचार-प्रसार करने वाले प्रसिद्ध संत कौन थे?", answer: "शंकरदेव", time: 20, type: "text" }
             ]
         },
         // आप भविष्य में इसी तरह History, Rajniti आदि के प्रश्न भी हर टीम के लिए बाँट सकते हैं
         "History": {
             "Team A": [
-                { text: "चन्द्रगुप्त मौर्य की प्राचीन राजधानी कहाँ थी?", answer: "पाटलीपुत्र", time: 15, type: "text" }
+                { text: "चन्द्रगुप्त मौर्य की प्राचीन राजधानी कहाँ थी?", answer: "पाटलीपुत्र", time: 20, type: "text" }
             ],
             "Team B": [
-                { text: "चन्द्रगुप्त मौर्य के प्रसिद्ध गुरु (मार्गदर्शक) कौन थे?", answer: "चाणक्य", time: 15, type: "text" }
+                { text: "चन्द्रगुप्त मौर्य के प्रसिद्ध गुरु (मार्गदर्शक) कौन थे?", answer: "चाणक्य", time: 20, type: "text" }
             ],
             "Team C": [
-                { text: "मौर्य वंश का अंतिम सम्राट कौन था?", answer: "बृहद्रथ", time: 15, type: "text" }
+                { text: "मौर्य वंश का अंतिम सम्राट कौन था?", answer: "बृहद्रथ", time: 20, type: "text" }
             ],
             "Team D": [
-                { text: "कुषाण सम्राट कनिष्क की प्राचीन राजधानी कहाँ थी?", answer: "पुरुषपुर", time: 15, type: "text" }
+                { text: "कुषाण सम्राट कनिष्क की प्राचीन राजधानी कहाँ थी?", answer: "पुरुषपुर", time: 20, type: "text" }
             ],
             "Team E": [
-                { text: "बंगाल में 'पालवंश' का संस्थापक कौन था?", answer: "गोपाल", time: 15, type: "text" }
+                { text: "बंगाल में 'पालवंश' का संस्थापक कौन था?", answer: "गोपाल", time: 20, type: "text" }
             ]
         },
         "Rajniti and Sanvidhaan": {
             "Team A": [
-                { text: "संविधान में गणराज्य की अवधारणा किस देश के संविधान से प्रेरित है?", answer: "फ्रांस", time: 15, type: "text" }
+                { text: "संविधान में गणराज्य की अवधारणा किस देश के संविधान से प्रेरित है?", answer: "फ्रांस", time: 20, type: "text" }
             ],
             "Team B": [
-                { text: "केन्द्र व राज्यों के मध्य शक्तियों का विभाजन किस देश के संविधान से प्रेरित है?", answer: "कनाडा", time: 15, type: "text" }
+                { text: "केन्द्र व राज्यों के मध्य शक्तियों का विभाजन किस देश के संविधान से प्रेरित है?", answer: "कनाडा", time: 20, type: "text" }
             ],
             "Team C": [
-                { text: "भारत में राज्यपाल बनने के लिए न्यूनतम आयु (वर्षों में) कितनी है?", answer: "35", time: 15, type: "text" }
+                { text: "भारत में राज्यपाल बनने के लिए न्यूनतम आयु (वर्षों में) कितनी है?", answer: "35", time: 20, type: "text" }
             ],
             "Team D": [
-                { text: "राज्य सभा की सदस्यता हेतु न्यूनतम आयु (वर्षों में) कितनी है?", answer: "30", time: 15, type: "text" }
+                { text: "राज्य सभा की सदस्यता हेतु न्यूनतम आयु (वर्षों में) कितनी है?", answer: "30", time: 20, type: "text" }
             ],
             "Team E": [
-                { text: "उच्चतम न्यायालय के न्यायाधीशों की अधिकतम संख्या कितनी हो सकती है?", answer: "34", time: 15, type: "text" }
+                { text: "उच्चतम न्यायालय के न्यायाधीशों की अधिकतम संख्या कितनी हो सकती है?", answer: "34", time: 20, type: "text" }
             ]
         },
         "Khel": {
             "Team A": [
-                { text: "पद्मश्री से सम्मानित प्रथम भारतीय धावक कौन थे?", answer: "मिल्खा", time: 15, type: "text" }
+                { text: "पद्मश्री से सम्मानित प्रथम भारतीय धावक कौन थे?", answer: "मिल्खा", time: 20, type: "text" }
             ],
             "Team B": [
-                { text: "इंग्लिश चैनल तैरकर पार करने वाले प्रथम भारतीय (पुरुष) कौन थे?", answer: "मिहिर", time: 15, type: "text" }
+                { text: "इंग्लिश चैनल तैरकर पार करने वाले प्रथम भारतीय (पुरुष) कौन थे?", answer: "मिहिर", time: 20, type: "text" }
             ],
             "Team C": [
-                { text: "इंग्लिश चैनल तैरकर पार करने वाली प्रथम भारतीय महिला कौन थीं?", answer: "आरती", time: 15, type: "text" }
+                { text: "इंग्लिश चैनल तैरकर पार करने वाली प्रथम भारतीय महिला कौन थीं?", answer: "आरती", time: 20, type: "text" }
             ],
             "Team D": [
-                { text: "प्रथम भारतीय एशियाई स्नूकर चैम्पियन कौन थे?", answer: "यासीन", time: 15, type: "text" }
+                { text: "प्रथम भारतीय एशियाई स्नूकर चैम्पियन कौन थे?", answer: "यासीन", time: 20, type: "text" }
             ],
             "Team E": [
-                { text: "एवरेस्ट पर चढ़ने वाली प्रथम भारतीय महिला कौन थीं?", answer: "बछेन्द्री", time: 15, type: "text" }
+                { text: "एवरेस्ट पर चढ़ने वाली प्रथम भारतीय महिला कौन थीं?", answer: "बछेन्द्री", time: 20, type: "text" }
             ]
         },
         "Bharat Vikas Parishad": {
             "Team A": [
-                { text: "भारत विकास परिषद् की स्थापना किस वर्ष हुई थी?", answer: "1963", time: 15, type: "text" }
+                { text: "भारत विकास परिषद् की स्थापना किस वर्ष हुई थी?", answer: "1963", time: 20, type: "text" }
             ],
             "Team B": [
-                { text: "भारत विकास परिषद् का केन्द्रीय कार्यालय किस नगर में स्थित है?", answer: "दिल्ली", time: 15, type: "text" }
+                { text: "भारत विकास परिषद् का केन्द्रीय कार्यालय किस नगर में स्थित है?", answer: "दिल्ली", time: 20, type: "text" }
             ],
             "Team C": [
-                { text: "परिषद् द्वारा 'भारत को जानो' प्रतियोगिता किस वर्ष प्रारंभ की गई थी?", answer: "2001", time: 15, type: "text" }
+                { text: "परिषद् द्वारा 'भारत को जानो' प्रतियोगिता किस वर्ष प्रारंभ की गई थी?", answer: "2001", time: 20, type: "text" }
             ],
             "Team D": [
-                { text: "'भारत को जानो' प्रतियोगिता कुल कितने स्तरों पर आयोजित होती है?", answer: "चार", time: 15, type: "text" }
+                { text: "'भारत को जानो' प्रतियोगिता कुल कितने स्तरों पर आयोजित होती है?", answer: "चार", time: 20, type: "text" }
             ],
             "Team E": [
-                { text: "पुस्तक की प्रस्तावना के अनुसार परिषद् के राष्ट्रीय महामंत्री कौन हैं?", answer: "सुनील (खेड़ा)", time: 15, type: "text" }
+                { text: "पुस्तक की प्रस्तावना के अनुसार परिषद् के राष्ट्रीय महामंत्री कौन हैं?", answer: "सुनील (खेड़ा)", time: 20, type: "text" }
             ]
         }
     },
@@ -489,3 +488,37 @@ document.addEventListener('keydown', (event) => {
         startTimer();
     }
 });
+
+function showFinalResults() {
+    // 1. Array banayein jisme sabhi teams aur unke scores hon
+    let teamsArr = [
+        { name: "Team A", score: scoresData['A'] },
+        { name: "Team B", score: scoresData['B'] },
+        { name: "Team C", score: scoresData['C'] },
+        { name: "Team D", score: scoresData['D'] },
+        { name: "Team E", score: scoresData['E'] }
+    ];
+
+    // 2. Scores ke basis par array ko sort karein (Highest to Lowest)
+    teamsArr.sort((a, b) => b.score - a.score);
+
+    // 3. HTML Elements mein Top 3 Teams ka data feed karein
+    // 1st Place
+    document.getElementById('team-1st').textContent = teamsArr[0].name;
+    document.getElementById('score-1st').textContent = teamsArr[0].score;
+
+    // 2nd Place
+    document.getElementById('team-2nd').textContent = teamsArr[1].name;
+    document.getElementById('score-2nd').textContent = teamsArr[1].score;
+
+    // 3rd Place
+    document.getElementById('team-3rd').textContent = teamsArr[2].name;
+    document.getElementById('score-3rd').textContent = teamsArr[2].score;
+
+    // 4. Modal (Popup) ko show karein
+    document.getElementById('results-modal').classList.remove('hidden');
+}
+
+function closeResults() {
+    document.getElementById('results-modal').classList.add('hidden');
+}
