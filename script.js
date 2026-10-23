@@ -558,6 +558,51 @@ function updateScore(teamLetter, points) {
 
 
 
+// // Keyboard Scoring and Controls
+// document.addEventListener('keydown', (event) => {
+//     // अगर होस्ट किसी Dropdown (Select) में कुछ चुन रहा है, तो शॉर्टकट ट्रिगर ना हों
+//     if (event.target.tagName === 'SELECT' || event.target.tagName === 'INPUT') {
+//         return;
+//     }
+
+//     // --- 1. Scoring Logic (Keys 1-5 for Teams A-E) ---
+//     const keyMap = { 
+//         'Digit1': 'A', 'Numpad1': 'A',
+//         'Digit2': 'B', 'Numpad2': 'B',
+//         'Digit3': 'C', 'Numpad3': 'C',
+//         'Digit4': 'D', 'Numpad4': 'D',
+//         'Digit5': 'E', 'Numpad5': 'E'
+//     };
+    
+//     if (keyMap[event.code]) {
+//         let teamLetter = keyMap[event.code];
+//         if (event.shiftKey) {
+//             updateScore(teamLetter, -5);
+//         } else {
+//             updateScore(teamLetter, 10);
+//         }
+//     }
+
+//     // --- 2. Quiz Controls Shortcuts ---
+//     if (event.code === 'ArrowRight') {
+//         // Right Arrow (➡) -> Next Question
+//         nextQuestion();
+//     } 
+//     else if (event.code === 'ArrowLeft') {
+//         // Left Arrow (⬅) -> Previous Question
+//         prevQuestion();
+//     } 
+//     else if (event.code === 'Space' || event.code === 'Enter') {
+//         // Spacebar या Enter -> Show/Hide Answer (Toggle)
+//         event.preventDefault(); // Space दबाने पर स्क्रीन नीचे स्क्रॉल होने से रोकेगा
+//         showAnswer();
+//     } 
+//     else if (event.code === 'KeyT') {
+//         // 'T' बटन -> Start Timer
+//         startTimer();
+//     }
+// });
+
 // Keyboard Scoring and Controls
 document.addEventListener('keydown', (event) => {
     // अगर होस्ट किसी Dropdown (Select) में कुछ चुन रहा है, तो शॉर्टकट ट्रिगर ना हों
@@ -576,9 +621,16 @@ document.addEventListener('keydown', (event) => {
     
     if (keyMap[event.code]) {
         let teamLetter = keyMap[event.code];
+        
+        // नए पासिंग राउंड रूल्स:
         if (event.shiftKey) {
+            // Shift + Key = -5 Points (Wrong Answer)
             updateScore(teamLetter, -5);
+        } else if (event.ctrlKey || event.altKey) {
+            // Ctrl + Key = +5 Points (Passed Question Correct Answer)
+            updateScore(teamLetter, 5);
         } else {
+            // Normal Key = +10 Points (Direct Correct Answer)
             updateScore(teamLetter, 10);
         }
     }
@@ -594,14 +646,19 @@ document.addEventListener('keydown', (event) => {
     } 
     else if (event.code === 'Space' || event.code === 'Enter') {
         // Spacebar या Enter -> Show/Hide Answer (Toggle)
-        event.preventDefault(); // Space दबाने पर स्क्रीन नीचे स्क्रॉल होने से रोकेगा
+        event.preventDefault(); 
         showAnswer();
     } 
     else if (event.code === 'KeyT') {
         // 'T' बटन -> Start Timer
         startTimer();
     }
+    else if (event.code === 'KeyM') {
+        // 'M' बटन -> KBC style Media Modal (पॉपअप) खोलने के लिए
+        openMediaModal();
+    }
 });
+
 
 function showFinalResults() {
     // 1. Array banayein jisme sabhi teams aur unke scores hon
