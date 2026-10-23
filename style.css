@@ -539,3 +539,15 @@ footer {
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
 }
+/* Question Reveal Animation */
+.hide-question {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+.reveal-question {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}

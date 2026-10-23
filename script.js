@@ -251,12 +251,42 @@ const qTracker = document.getElementById('question-tracker');
 const qText = document.getElementById('question-text');
 const aText = document.getElementById('answer-text');
 const timeDisplay = document.getElementById('time-left');
+const kbcQuesSound = document.getElementById('kbc-ques-sound');
+const kbcTimerSound = document.getElementById('kbc-timer-sound');
+
+function stopKbcSound(audioElement) {
+    if (audioElement) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+    }
+}
 
 const mediaElements = {
     picture: document.getElementById('picture-media'),
     video: document.getElementById('video-media'),
     audio: document.getElementById('audio-media')
 };
+
+function startTimer() {
+    clearInterval(timer); 
+    
+    // --- KBC Timer Sound ---
+    if (kbcTimerSound) {
+        stopKbcSound(kbcTimerSound);
+        kbcTimerSound.play().catch(e => console.log("Audio play blocked by browser"));
+    }
+
+    timer = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timeDisplay.textContent = timeLeft;
+        } else {
+            clearInterval(timer);
+            timeDisplay.textContent = "0 (Time's Up!)";
+            stopKbcSound(kbcTimerSound); // टाइम अप होने पर साउंड रोक दें
+        }
+    }, 1000);
+}
 
 // 4. Dropdown Handlers
 function handleRoundChange() {
@@ -334,13 +364,15 @@ function handleSubRoundChange() {
     }
 }
 
+
+
 function loadQuestion() {
     if (!currentQuestions || currentQuestions.length === 0) return;
     
     const q = currentQuestions[currentIndex];
     const selectedRound = roundSelect.value;
     
-    // --- Timer Setup ---
+    // 1. Timer Reset
     if (selectedRound !== "Rapid Fire") {
         clearInterval(timer);
         timeLeft = q.time;
@@ -348,77 +380,70 @@ function loadQuestion() {
     } else {
         if (currentIndex === 0) {
             clearInterval(timer);
-            timeLeft = 60; // रैपिड फायर के लिए 60 सेकंड
+            timeLeft = 60;
             timeDisplay.textContent = timeLeft;
         }
     }
 
+    // 2. Hide everything initially for Suspense
     qTracker.textContent = `Question ${currentIndex + 1} of ${currentQuestions.length}`;
+    
     qText.textContent = q.text;
+    qText.classList.remove('reveal-question');
+    qText.classList.add('hide-question'); 
+    
     aText.textContent = q.answer;
     aText.classList.add('hidden');
 
-    
-    
-    // Reset media
     Object.values(mediaElements).forEach(el => el.style.display = "none");
-
-    // let isVideoOrAudio = false;
-
-    // // Handle media rendering
-    // if (q.type && mediaElements[q.type]) {
-    //     const mediaEl = mediaElements[q.type];
-    //     mediaEl.src = q.mediaSrc;
-    //     mediaEl.style.display = "block";
-        
-    //     // अगर वीडियो या ऑडियो है, तो खत्म होने पर टाइमर चलाएं
-    //     if (q.type === "video" || q.type === "audio") {
-    //         isVideoOrAudio = true;
-    //         mediaEl.load(); 
-    //         mediaEl.onended = () => startTimer();
-    //     }
-    // }
-
-    // // --- AUTO START TIMER LOGIC ---
-    // // अगर प्रश्न टेक्स्ट या पिक्चर है, तो तुरंत टाइमर शुरू कर दें
-    // if (!isVideoOrAudio) {
-    //     if (selectedRound === "Rapid Fire") {
-    //         // रैपिड फायर में सिर्फ पहले प्रश्न पर टाइमर स्टार्ट करें, बाकी में बैकग्राउंड में चलता रहेगा
-    //         if (currentIndex === 0) {
-    //             startTimer();
-    //         }
-    //     } else {
-    //         // Passing, Optional और Picture राउंड में तुरंत स्टार्ट करें
-    //         startTimer();
-    //     }
-    // }
-
-    // नया "Show Media" बटन खोजें और उसे पहले छुपा दें
     const mediaBtn = document.getElementById('show-media-btn');
     if (mediaBtn) mediaBtn.classList.add('hidden');
 
-    // चेक करें कि प्रश्न में कोई मीडिया है या नहीं
     let hasMedia = (q.type === "video" || q.type === "audio" || q.type === "picture");
-
-    // --- 3. Media & Auto-Timer Logic ---
     if (hasMedia) {
-        // अगर मीडिया है, तो डेटा को मोडल के लिए सेव करें और "Show Media" बटन दिखाएं
         currentMedia.type = q.type;
         currentMedia.src = q.mediaSrc;
+    }
+
+    // 3. Action to perform AFTER sound finishes
+    const showQuestionAndContinue = () => {
+        qText.classList.remove('hide-question');
+        qText.classList.add('reveal-question');
         
-        if (mediaBtn) mediaBtn.classList.remove('hidden');
-        
-        // नोट: यहाँ टाइमर स्टार्ट नहीं होगा। टाइमर तब स्टार्ट होगा जब आप `closeMediaModal()` कॉल करेंगे।
+        if (hasMedia) {
+            if (mediaBtn) mediaBtn.classList.remove('hidden');
+        } else {
+            if (selectedRound === "Rapid Fire") {
+                if (currentIndex === 0) startTimer(); 
+            } else {
+                startTimer(); 
+            }
+        }
+    };
+
+    // 4. Sound Logic (FIXED FOR RAPID FIRE)
+    // Agar Rapid Fire nahi hai, ya Rapid Fire ka pehla question hai, tabhi timer sound reset hoga
+    if (selectedRound !== "Rapid Fire" || currentIndex === 0) {
+        stopKbcSound(kbcTimerSound);
+    }
+    
+    if (selectedRound === "Rapid Fire") {
+        // Rapid fire mein question aate hi sidha aage badhega aur purana timer sound chalta rahega
+        showQuestionAndContinue();
     } else {
-        // अगर कोई मीडिया नहीं है (सिर्फ टेक्स्ट है), तो तुरंत टाइमर स्टार्ट कर दें
-        if (selectedRound === "Rapid Fire") {
-            // रैपिड फायर में सिर्फ पहले प्रश्न पर
-            if (currentIndex === 0) {
-                startTimer();
+        // Baaki rounds ke liye KBC question sound chalega
+        if (kbcQuesSound) {
+            stopKbcSound(kbcQuesSound);
+            let playPromise = kbcQuesSound.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    kbcQuesSound.onended = showQuestionAndContinue;
+                }).catch(error => {
+                    showQuestionAndContinue(); 
+                });
             }
         } else {
-            // बाकी सभी नॉर्मल टेक्स्ट राउंड्स में तुरंत स्टार्ट
-            startTimer();
+            showQuestionAndContinue();
         }
     }
 }
@@ -464,18 +489,20 @@ function closeMediaModal() {
     }
 }
 
+
+
 function showAnswer() {
     if (currentQuestions.length > 0) {
-        // Toggle Logic: अगर उत्तर छुपा है, तो दिखाओ, वरना छुपा दो
         if (aText.classList.contains('hidden')) {
             aText.classList.remove('hidden');
             
-            // रैपिड फायर में 'Show Answer' करने पर टाइमर नहीं रुकना चाहिए
             if (roundSelect.value !== "Rapid Fire") {
                 clearInterval(timer); 
+                // --- उत्तर दिखाते ही टाइमर की टिक-टिक (साउंड) रोक दें ---
+                stopKbcSound(kbcTimerSound);
             }
         } else {
-            aText.classList.add('hidden'); // दोबारा दबाने पर उत्तर छुप जाएगा
+            aText.classList.add('hidden'); 
         }
     }
 }
@@ -494,18 +521,18 @@ function prevQuestion() {
     }
 }
 
-function startTimer() {
-    clearInterval(timer); 
-    timer = setInterval(() => {
-        if (timeLeft > 0) {
-            timeLeft--;
-            timeDisplay.textContent = timeLeft;
-        } else {
-            clearInterval(timer);
-            timeDisplay.textContent = "0 (Time's Up!)";
-        }
-    }, 1000);
-}
+// function startTimer() {
+//     clearInterval(timer); 
+//     timer = setInterval(() => {
+//         if (timeLeft > 0) {
+//             timeLeft--;
+//             timeDisplay.textContent = timeLeft;
+//         } else {
+//             clearInterval(timer);
+//             timeDisplay.textContent = "0 (Time's Up!)";
+//         }
+//     }, 1000);
+// }
 
 // 6. Scoring Logic
 // Function to handle UI button clicks (+10 or -5)
