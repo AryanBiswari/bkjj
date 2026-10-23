@@ -1,11 +1,26 @@
 // 1. Data Structure for all rounds
 const quizData = {
     "Passing Round": [
-        { text: "बद्रीनाथ किस नदी के किनारे स्थित है?", answer: "अलकनन्दा", time: 20, type: "text" },
-        { text: "कटक किस नदी के किनारे स्थित है?", answer: "महानदी", time: 20, type: "text" },
-        { text: "श्रीनगर किस नदी के किनारे स्थित है?", answer: "झेलम", time: 20, type: "text" },
-        { text: "डिबरूगढ़ किस नदी के तट पर स्थित है?", answer: "ब्रह्मपुत्र", time: 20, type: "text" },
-        { text: "शान्त घाटी (Silent Valley) किस राज्य में स्थित है?", answer: "केरल", time: 20, type: "text" }
+        // { text: "बद्रीनाथ किस नदी के किनारे स्थित है?", answer: "अलकनन्दा", time: 20, type: "text" },
+        // { text: "कटक किस नदी के किनारे स्थित है?", answer: "महानदी", time: 20, type: "text" },
+        // { text: "श्रीनगर किस नदी के किनारे स्थित है?", answer: "झेलम", time: 20, type: "text" },
+        // { text: "डिबरूगढ़ किस नदी के तट पर स्थित है?", answer: "ब्रह्मपुत्र", time: 20, type: "text" },
+        // { text: "शान्त घाटी (Silent Valley) किस राज्य में स्थित है?", answer: "केरल", time: 20, type: "text" }
+        { text: "अयोध्या किस नदी के तट पर स्थित है?", answer: "सरयू", time: 20, type: "text" },
+    { text: "अहमदाबाद किस नदी के किनारे स्थित है?", answer: "साबरमती", time: 20, type: "text" },
+    { text: "विजयवाड़ा किस नदी के किनारे स्थित है?", answer: "कृष्णा", time: 20, type: "text" },
+    { text: "तिरुचिरापल्ली किस नदी के तट पर स्थित है?", answer: "कावेरी", time: 20, type: "text" },
+    { text: "कोटा किस नदी के किनारे स्थित है?", answer: "चम्बल", time: 20, type: "text" },
+    { text: "गया किस नदी के तट पर स्थित है?", answer: "फल्गु", time: 20, type: "text" },
+    { text: "हैदराबाद किस नदी के किनारे स्थित है?", answer: "मूसी", time: 20, type: "text" },
+    { text: "भारत का प्रथम आणविक केन्द्र कहाँ स्थापित किया गया था?", answer: "तारापुर", time: 20, type: "text" },
+    { text: "भारत में स्थापित प्रथम स्वदेशी बैंक कौन-सा था?", answer: "पंजाब नेशनल बैंक", time: 20, type: "text" },
+    { text: "इंग्लिश चैनल तैरकर पार करने वाला प्रथम भारतीय कौन था?", answer: "मिहिर सेन", time: 20, type: "text" },
+    { text: "भारत की पहली महिला प्रशासनिक अधिकारी कौन थीं?", answer: "अन्ना मल्होत्रा", time: 20, type: "text" },
+    { text: "स्वतंत्र भारत में डाक टिकट पर सर्वप्रथम किस महिला की छवि मुद्रित की गई?", answer: "मीराबाई", time: 20, type: "text" },
+    { text: "भारत का राष्ट्रीय ध्येय वाक्य क्या है?", answer: "सत्यमेव जयते", time: 20, type: "text" },
+    { text: "भारत में प्रकाशित सबसे पुराना दैनिक समाचार पत्र कौन-सा है?", answer: "मुम्बई समाचार", time: 20, type: "text" },
+    { text: "हीराकुण्ड परियोजना किस राज्य में स्थित है?", answer: "ओडिशा", time: 20, type: "text" }
     ],
     "Picture Round": [
         { text: "यह चित्र किस प्रसिद्ध भारतीय क्रांतिकारी का है?", answer: "रासबिहारी बोस", time: 20, type: "picture", mediaSrc: "images/Rash Behari Bose.jpg" },
